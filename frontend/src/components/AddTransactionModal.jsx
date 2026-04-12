@@ -70,7 +70,7 @@ export default function AddTransactionModal({ onClose, onAdded }) {
         });
         data = res.data;
       } else {
-        const res = await api.post('/transactions', { ...form, amount: parseFloat(form.amount) });
+        const res = await api.post('/transactions', { ...form, type: mode === 'income' ? 'income' : 'expense', amount: parseFloat(form.amount) });
         data = res.data;
       }
       onAdded(data);
@@ -101,7 +101,12 @@ export default function AddTransactionModal({ onClose, onAdded }) {
           {/* Mode tabs */}
           <div className="grid grid-cols-4 gap-1 p-1 bg-slate-100 dark:bg-slate-700 rounded-xl">
             {MODES.map(m => (
-              <button key={m} type="button" onClick={() => setMode(m)}
+              <button key={m} type="button" onClick={() => {
+                setMode(m);
+                if (m === 'income') setForm(f => ({ ...f, type: 'income', category: 'Salary' }));
+                else if (m === 'expense') setForm(f => ({ ...f, type: 'expense', category: 'Food' }));
+                else if (m === 'recurring') setForm(f => ({ ...f, type: 'expense', category: 'Food' }));
+              }}
                 className={`py-1.5 rounded-lg text-xs font-semibold transition-all ${mode === m ? modeColors[m] : 'text-slate-500 dark:text-slate-400'}`}>
                 {modeLabels[m]}
               </button>
