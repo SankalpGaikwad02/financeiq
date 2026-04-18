@@ -6,13 +6,6 @@
 
 ---
 
-## 📸 Screenshots
-
-> Dashboard Overview
-![Dashboard](https://via.placeholder.com/800x450/6366f1/ffffff?text=FinanceIQ+Dashboard)
-
----
-
 ## ✨ Features
 
 - 🔐 **Authentication** — Secure JWT-based login and registration
